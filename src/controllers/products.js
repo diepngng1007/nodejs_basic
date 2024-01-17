@@ -50,7 +50,7 @@ export const deleteProduct = async (req, res) => {
   try {
     const id = req.params.id;
     const response = await Product.findByIdAndDelete(id);
-    if(!response){
+    if (!response) {
       return res.status(400).json({
         message: "ko tìm thấy để xóa"
       })
@@ -70,26 +70,26 @@ export const deleteProduct = async (req, res) => {
 export const postProduct = async (req, res) => {
   try {
     const data = req.body;
-    const { error } = productValid.validate(req.body,{
+    const { error } = productValid.validate(req.body, {
       abortEarly: false,
     });
     const newProduct = new Product({
       data: data
     });
-    if(error){
-        const errors = error.details.map((err) => err.message);
-        return res.status(204).json({
-          message: errors.join(",")
-        })
+    if (error) {
+      const errors = error.details.map((err) => err.message);
+      return res.status(204).json({
+        message: errors.join(",")
+      })
     }
     const response = await newProduct.save();
-    if(!response){
-       return res.status(204).json({message: "ko tim thay sp"})
+    if (!response) {
+      return res.status(204).json({ message: "ko tim thay sp" })
     }
     return res.status(200).json({
       message: "them thanh cong"
     })
-    
+
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -102,22 +102,22 @@ export const updateProduct = async (req, res) => {
   try {
     const id = req.params.id
     const data = req.body
-    if(error){
+    if (error) {
       const errors = error.details.map((err) => err.message);
       return res.status(204).json({
         message: errors.join(",")
       })
-  }
-  const response = await Product.findByIdAndUpdate(id,data)
-    if(!response){
-      return res.status(204).json({message: "ko tim thay sp"})
+    }
+    const response = await Product.findByIdAndUpdate(id, data)
+    if (!response) {
+      return res.status(204).json({ message: "ko tim thay sp" })
     }
     res.status(200).json({
       message: "cap nhat thanh cong"
     })
   } catch (error) {
-   return res.status(500).json({
-    message: error.name || "loi server",
-   })
+    return res.status(500).json({
+      message: error.name || "loi server",
+    })
   }
 };
