@@ -42,12 +42,14 @@ export const signUp = async (req, res) => {
       });
     }
     const user = {
-      username: req.body.username,
+      username: req.body.username, // role đâu ??
       email: req.body.email,
       password: passwordHash,
+      role: req.body.role
     };
 
     const data = await User.create(user);
+    console.log(123, data);
     if (!data) {
       return res.status(400).json({
         message: "Dang ky that bai!",

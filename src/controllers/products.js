@@ -69,6 +69,7 @@ export const deleteProduct = async (req, res) => {
 
 export const postProduct = async (req, res) => {
   try {
+    console.log(1)
     const { error } = productValid.validate(req.body, { abortEarly: false })
     if(error){
         const errors = error.details.map((err) => err.message)
@@ -76,7 +77,9 @@ export const postProduct = async (req, res) => {
             message: errors.join(",")
         })
     }
+    console.log(2);
     const data = await Product.create(req.body)
+    console.log('data', data)
     if(!data){
         return res.status(400).json({
             message: "thêm sản phẩm thất bại"
@@ -87,6 +90,7 @@ export const postProduct = async (req, res) => {
         data
     })
   } catch (error) {
+    console.log(11, error)
     return res.status(500).json({
         message: "Lỗi server"
     })
