@@ -16,7 +16,7 @@ export const signUp = async (req, res) => {
      */
 
     const { error } = signUpValid.validate(req.body, { abortEarly: false });
-
+    console.log(error)
     if (error) {
       const errors = error.details.map((err) => err.message);
       return res.status(400).json({
