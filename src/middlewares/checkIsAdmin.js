@@ -8,15 +8,15 @@ export const checkIsAdmin = async (req, res, next) => {
     // Kiem tra xem user co phai la admin hay khong?
     const token = req.headers?.authorization.split(" ")[1];
 
-    // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTYwNzE2ZWYxZDlmMGIwYTNjMzIzMmUiLCJpYXQiOjE3MDEyNTA5MDQsImV4cCI6MTcwMTMzNzMwNH0.7V-nvBMZEgf5WUSN7PHUB0MSs7wvrMUI-0qeQ3rBAOo
-    // ["Bearer", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTYwNzE2ZWYxZDlmMGIwYTNjMzIzMmUiLCJpYXQiOjE3MDEyNTA5MDQsImV4cCI6MTcwMTMzNzMwNH0.7V-nvBMZEgf5WUSN7PHUB0MSs7wvrMUI-0qeQ3rBAOo"]
+    
     const decode = jwt.verify(token, process.env.SECRET_CODE);
     if (!decode) {
       return res.status(400).json({
         message: "Token error!",
       });
     }
-    const checkUser = await User.findById(decode._id);
+    
+    const checkUser = await User.findById(decode.id);
     if (!checkUser) {
       return res.status(400).json({
         message: "User not found!",

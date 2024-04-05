@@ -12,11 +12,20 @@ const ProductSchema = new mongoose.Schema(
     desc: {
       type: String,
     },
-    slug: {
+    quantity: {
+      type: Number,
+      required: true
+    },
+    id_type: {
       type: String,
-      required: true,
-      unique: true,
-    }
+      required: true
+    },
+    thumbnail: {
+      type: String,
+    },
+    size: [{ 
+      type:  mongoose.Types.ObjectId, ref: "dataSizeProduct"
+    }]
   },
   {
     timestamps: true,

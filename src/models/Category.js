@@ -10,11 +10,6 @@ const CategorySchema = new mongoose.Schema(
         desc: {
             type: String,
         },
-        slug: {
-            type: String,
-            required: true,
-            unique: true,
-        },
         products: [],
     },
     {
@@ -23,5 +18,9 @@ const CategorySchema = new mongoose.Schema(
 
     }
 )
+
+// id 
+// Bánh kem su 
+// banh-kem-su
 
 export default mongoose.model("dataCategory", CategorySchema)
